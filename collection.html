@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            text-align: right; /* Aligner le texte à droite */
+        }
+        .hidden { display: none; }
+        .low-contrast { color: #ccc; }
+        .navbar {
+            text-align: right; /* Aligner le texte à droite dans la barre de navigation */
+        }
+        .navbar-nav {
+            flex-direction: row-reverse; /* Inverser l'ordre des éléments de navigation */
+        }
+        .content {
+            text-align: right; /* Aligner le texte à droite dans le contenu principal */
+        }
+        .modal-content {
+            text-align: right; /* Aligner le texte à droite dans les modals */
+        }
+        footer {
+            text-align: right; /* Aligner le texte à droite dans le pied de page */
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Ma Collection de Films</h1></header>
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Accueil</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Ma Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajouter.html">Ajouter un Film</a></li>
+                    <li class="nav-item"><a class="nav-link" href="critiques.html">Critiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aide.html">Aide</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto" id="auth-buttons">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Créer un Compte</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content container">
+        <h2>Films dans Ma Collection</h2>
+        <div class="row" id="user-collection">
+            <!-- Films seront ajoutés ici par JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal de Confirmation de Suppression -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmer la suppression</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir réaliser cette action ou préférez-vous l'annuler ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Supprimer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne pas supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Informations Légales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                        <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Plan du Site</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="collection.html">Ma Collection</a></li>
+                        <li><a href="ajouter.html">Ajouter un Film</a></li>
+                        <li><a href="critiques.html">Critiques</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="aide.html">Aide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens Utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.allocine.fr" target="_blank">AlloCiné</a></li>
+                        <li><a href="https://www.imdb.com" target="_blank">IMDb</a></li>
+                        <li><a href="https://www.rottentomatoes.com" target="_blank">Rotten Tomatoes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                &copy; 2025 Movie Collector
+            </div>
+        </div>
+    </footer>
+    <script>
+        const apiKey = 'b545d6b8';
+        let movieIdToDelete;
+
+        // Vérifier si l'utilisateur est connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const userEmail = sessionStorage.getItem('userEmail');
+            if (!userEmail) {
+                alert('Vous devez être connecté pour accéder à cette page.');
+                window.location.href = 'login.html';
+            } else {
+                // Masquer les boutons de connexion et de création de compte
+                const authButtons = document.getElementById('auth-buttons');
+                authButtons.style.display = 'none';
+                displayUserCollection();
+            }
+        });
+
+        // Fonction pour récupérer les données d'un film
+        async function fetchMovieData(id) {
+            try {
+                const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${apiKey}`);
+                if (!response.ok) throw new Error('Erreur lors de la récupération des données du film');
+                return response.json();
+            } catch (error) {
+                console.error(error);
+                alert('Impossible de récupérer les données du film.');
+            }
+        }
+
+        // Afficher les films de la collection de l'utilisateur avec images
+        async function displayUserCollection() {
+            const userCollection = document.getElementById('user-collection');
+            const collection = JSON.parse(sessionStorage.getItem('userCollection')) || [];
+            const userRatings = JSON.parse(sessionStorage.getItem('userRatings')) || {};
+            userCollection.innerHTML = ''; // Clear previous content
+            for (const movieId of collection) {
+                const movie = await fetchMovieData(movieId);
+                if (!movie) continue;
+                const movieItem = document.createElement('div');
+                movieItem.classList.add('col-md-3', 'movie-item');
+                movieItem.setAttribute('data-movie-id', movieId);
+                movieItem.innerHTML = `
+                    <img src="${movie.Poster}" class="movie-poster" alt="">
+                    <h5>${movie.Title} (${movie.Year})</h5>
+                    <p>Réalisé par ${movie.Director}</p>
+                    <p>Votre note: <span id="user-rating-${movieId}">${userRatings[movieId] || 'Aucune'}</span>/10</p>
+                    <button class="btn btn-primary btn-sm" onclick="showDeleteConfirmModal('${movieId}', '${movie.Title}')">Supprimer</button>
+                    <div class="movie-details">
+                        <img src="${movie.Poster}" alt="">
+                        <h6>${movie.Title} (${movie.Year})</h6>
+                        <p><strong>Réalisateur:</strong> ${movie.Director}</p>
+                        <p><strong>Acteurs:</strong> ${movie.Actors}</p>
+                        <p><strong>Résumé:</strong> ${movie.Plot}</p>
+                        <p><strong>Note IMDb:</strong> ${movie.imdbRating}</p>
+                        <p>Votre note (/10):</p>
+                        <input type="number" id="rating-${movieId}" class="form-control mb-2" min="0" max="10" value="${userRatings[movieId] || ''}" onchange="saveRating('${movieId}', this.value)">
+                        <textarea class="form-control mt-2" onchange="saveReview('${movieId}', this.value)"></textarea>
+                    </div>
+                `;
+                userCollection.appendChild(movieItem);
+
+                // Ajouter un gestionnaire d'événements pour afficher les détails
+                movieItem.addEventListener('click', function(event) {
+                    if (event.target.tagName !== 'TEXTAREA' && event.target.tagName !== 'INPUT') {
+                        const details = movieItem.querySelector('.movie-details');
+                        details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                    }
+                });
+            }
+        }
+
+        // Afficher le modal de confirmation de suppression
+        function showDeleteConfirmModal(movieId, movieTitle) {
+            movieIdToDelete = movieId;
+            const modalTitle = document.getElementById('deleteConfirmModalLabel');
+            modalTitle.textContent = `Supprimer "${movieTitle}" de votre collection ? Attention : ceci ne le supprimera pas du catalogue`;
+            $('#deleteConfirmModal').modal('show');
+        }
+
+        // Confirmer la suppression du film de la collection
+        document.getElementById('confirmDeleteButton').addEventListener('click', function() {
+            removeFromCollection(movieIdToDelete);
+            $('#deleteConfirmModal').modal('hide');
+        });
+
+        // Supprimer un film de la collection
+        function removeFromCollection(movieId) {
+            let collection = JSON.parse(sessionStorage.getItem('userCollection')) || [];
+            collection = collection.filter(id => id !== movieId);
+            sessionStorage.setItem('userCollection', JSON.stringify(collection));
+            displayUserCollection(); // Mettre à jour l'affichage
+        }
+
+        // Sauvegarder une critique
+        function saveReview(movieId, review) {
+            let critiques = JSON.parse(sessionStorage.getItem('userCritiques')) || {};
+            critiques[movieId] = review;
+            sessionStorage.setItem('userCritiques', JSON.stringify(critiques));
+            alert('Critique sauvegardée !');
+        }
+
+        // Sauvegarder une note
+        function saveRating(movieId, rating) {
+            let ratings = JSON.parse(sessionStorage.getItem('userRatings')) || {};
+            ratings[movieId] = rating;
+            sessionStorage.setItem('userRatings', JSON.stringify(ratings));
+            document.getElementById(`user-rating-${movieId}`).textContent = rating;
+            alert('Note sauvegardée !');
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

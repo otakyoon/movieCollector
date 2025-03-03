@@ -1,0 +1,98 @@
+
+
+nav {
+    background-color: #444;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+/* General styles for all pages */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #444;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #007bff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    margin-top: 50px;
+}
+
+.help-container, .register-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.register-container {
+    max-width: 400px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.movie-poster {
+    width: 100px;
+    height: auto;
+}
+
+.movie-item {
+    margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.movie-details {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+}
+
+.movie-details img {
+    max-width: 100%;
+    height: auto;
+}
+
+.content { padding-bottom: 180px; } /* Ajoute un espace en bas du contenu */

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Collector - Ajouter un Film</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .hidden { display: none; }
+        .low-contrast { color: #ccc; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ajouter un Film</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Accueil</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajouter.html">Ajouter un Film</a></li>
+                    <li class="nav-item"><a class="nav-link" href="critiques.html">Critiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Ma Collection</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aide.html">Aide</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto" id="auth-buttons">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Créer un Compte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content container">
+        <h2>Formulaire d'Ajout de Film</h2>
+        <form id="add-movie-form">
+            <div class="form-group">
+                <label for="movie-id">ID du Film (IMDb ID)</label>
+                <input type="text" class="form-control" id="movie-id" placeholder="Entrez l'ID du film">
+            </div>
+            <button aria-label="buton" type="submit" class="btn btn-primary" title="Ajouter le film à la collection">Ajouter</button>
+        </form>
+    </div>
+
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Informations Légales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                        <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Plan du Site</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="collection.html">Ma Collection</a></li>
+                        <li><a href="ajouter.html">Ajouter un Film</a></li>
+                        <li><a href="critiques.html">Critiques</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="aide.html">Aide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens Utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.allocine.fr" target="_blank">AlloCiné</a></li>
+                        <li><a href="https://www.imdb.com" target="_blank">IMDb</a></li>
+                        <li><a href="https://www.rottentomatoes.com" target="_blank">Rotten Tomatoes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                &copy; 2025 Movie Collector
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Ajouter un film à la collection
+        document.getElementById('add-movie-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const movieId = document.getElementById('movie-id').value;
+
+            const collection = JSON.parse(sessionStorage.getItem('userCollection')) || [];
+            collection.push(movieId);
+            sessionStorage.setItem('userCollection', JSON.stringify(collection));
+
+            alert('Film ajouté à votre collection !');
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

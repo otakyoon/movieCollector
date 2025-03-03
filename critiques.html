@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <header><h1>Critiques de Films</h1></header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Accueil</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="critiques.html">Critiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Ma Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajouter.html">Ajouter un Film</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aide.html">Aide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto" id="auth-buttons">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Créer un Compte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content container">
+        <h2>Écrire une Critique</h2>
+        <div role="buton" class="btn btn-primary" id="start-critique-btn">Commencer</div>
+        <h2>Mes Critiques</h2>
+        <ul class="list-unstyled" id="user-critiques">
+            <!-- Critiques seront ajoutées ici par JavaScript -->
+        </ul>
+    </div>
+
+    <!-- Modal pour le Nom du Film -->
+    <div class="modal fade" id="movieNameModal" tabindex="-1" aria-labeleby="movieNameModalLabel" aria-hiden="yes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieNameModalLabel">Nom du Film</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hiden="yes">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="movie-name" >
+                </div>
+                <div class="modal-footer">
+                    <div role="buton" class="btn btn-primary" id="movie-name-next">Suivant</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour le Numéro IMDb -->
+    <div class="modal fade" id="imdbIdModal" tabindex="-1" aria-labeledby="imdbIdModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imdbIdModalLabel">Numéro IMDb</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="movie-id" placeholder="Entrez l'ID IMDb du film">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="imdb-id-next">Suivant</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Note -->
+    <div class="modal fade" id="ratingModal" tabindex="-1" aria-labeledby="ratingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ratingModalLabel">Ma Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="number" class="form-control" id="movie-rating" placeholder="Entrez votre note (/10)">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="rating-next">Suivant</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Critique -->
+    <div class="modal fade" id="critiqueModal" tabindex="-1" aria-labeledby="critiqueModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="critiqueModalLabel">Ma Critique</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="critique" rows="3" placeholder="Écrivez votre critique ici"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="critique-next">Suivant</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Validation -->
+    <div class="modal fade" id="validationModal" tabindex="-1" aria-labeledby="validationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationModalLabel">Validation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="validation-summary"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="validation-confirm">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Confirmation du Pseudo -->
+    <div class="modal fade" id="pseudoModal" tabindex="-1" aria-labeledby="pseudoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pseudoModalLabel">Confirmation du Pseudo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="user-pseudo" placeholder="Entrez votre pseudo">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="pseudo-confirm">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour l'Acceptation de la Diffusion -->
+    <div class="modal fade" id="acceptationModal" tabindex="-1" aria-labeledby="acceptationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="acceptationModalLabel">Acceptation de la Diffusion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Acceptez-vous la diffusion de votre critique ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="acceptation-confirm">Accepter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Majorité -->
+    <div class="modal fade" id="majeurModal" tabindex="-1" aria-labeledby="majeurModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="majeurModalLabel">Êtes-vous majeur ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Confirmez que vous êtes majeur.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="majeur-confirm">Oui</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Vision du Film -->
+    <div class="modal fade" id="visionFilmModal" tabindex="-1" aria-labeledby="visionFilmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visionFilmModalLabel">Avez-vous vu le film ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Confirmez que vous avez vu le film.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="vision-film-confirm">Oui</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la Date de Naissance -->
+    <div class="modal fade" id="dateNaissanceModal" tabindex="-1" aria-labeledby="dateNaissanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dateNaissanceModalLabel">Date de Naissance</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="date" class="form-control" id="user-birthdate">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="birthdate-confirm">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour Quand Avez-vous Vu le Film -->
+    <div class="modal fade" id="whenWatchedModal" tabindex="-1" aria-labeledby="whenWatchedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="whenWatchedModalLabel">Quand avez-vous vu le film ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="date" class="form-control" id="film-watch-date">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="watch-date-confirm">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour les Mots-Clés -->
+    <div class="modal fade" id="keywordsModal" tabindex="-1" aria-labeledby="keywordsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="keywordsModalLabel">Mots-Clés pour le Film</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="film-keywords" placeholder="Entrez au moins 8 mots-clés séparés par des virgules">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="keywords-confirm">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour le Questionnaire -->
+    <div class="modal fade" id="questionnaireModal" tabindex="-1" aria-labeledby="questionnaireModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="questionnaireModalLabel">Questionnaire</h5>
+                    <div role="buton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p>Souhaitez-vous répondre à un questionnaire pour nous aider à mieux comprendre vos préférences cinématographiques ?</p>
+                </div>
+                <div class="modal-footer">
+                    <div role="buton" type="button" class="btn btn-primary" id="questionnaire-yes">Oui</div>
+                    <div role="buton" class="btn btn-secondary" id="questionnaire-no">Non</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Informations Légales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                        <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Plan du Site</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="collection.html">Ma Collection</a></li>
+                        <li><a href="ajouter.html">Ajouter un Film</a></li>
+                        <li><a href="critiques.html">Critiques</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="aide.html">Aide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens Utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.allocine.fr" target="_blank">AlloCiné</a></li>
+                        <li><a href="https://www.imdb.com" target="_blank">IMDb</a></li>
+                        <li><a href="https://www.rottentomatoes.com" target="_blank">Rotten Tomatoes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                &copy; 2025 Movie Collector
+            </div>
+        </div>
+    </footer>
+    <script>
+        const apiKey = 'b545d6b8';
+        let critiqueData = {};
+
+        // Afficher les critiques de l'utilisateur
+        function displayUserCritiques() {
+            const userCritiques = document.getElementById('user-critiques');
+            const critiques = JSON.parse(sessionStorage.getItem('userCritiques')) || [];
+            userCritiques.innerHTML = '';
+            critiques.forEach(critique => {
+                const li = document.createElement('li');
+                li.textContent = `Critique pour ${critique.film}: ${critique.text}`;
+                userCritiques.appendChild(li);
+            });
+        }
+
+        // Étape 1: Nom du Film
+        document.getElementById('start-critique-btn').addEventListener('click', function() {
+            $('#movieNameModal').modal('show');
+        });
+
+        document.getElementById('movie-name-next').addEventListener('click', function() {
+            critiqueData.name = document.getElementById('movie-name').value;
+            $('#movieNameModal').modal('hide');
+            $('#majeurModal').modal('show');
+        });
+
+        // Étape 2: Êtes-vous majeur ?
+        document.getElementById('majeur-confirm').addEventListener('click', function() {
+            $('#majeurModal').modal('hide');
+            $('#visionFilmModal').modal('show');
+        });
+
+        // Étape 3: Avez-vous vu le film ?
+        document.getElementById('vision-film-confirm').addEventListener('click', function() {
+            $('#visionFilmModal').modal('hide');
+            $('#whenWatchedModal').modal('show');
+        });
+
+        // Étape 4: Quand avez-vous vu le film ?
+        document.getElementById('watch-date-confirm').addEventListener('click', function() {
+            critiqueData.watchDate = document.getElementById('film-watch-date').value;
+            $('#whenWatchedModal').modal('hide');
+            $('#imdbIdModal').modal('show');
+        });
+
+        // Étape 5: Numéro IMDb
+        document.getElementById('imdb-id-next').addEventListener('click', function() {
+            critiqueData.imdbId = document.getElementById('movie-id').value;
+            $('#imdbIdModal').modal('hide');
+            $('#ratingModal').modal('show');
+        });
+
+        // Étape 6: Ma Note
+        document.getElementById('rating-next').addEventListener('click', function() {
+            critiqueData.rating = document.getElementById('movie-rating').value;
+            $('#ratingModal').modal('hide');
+            $('#critiqueModal').modal('show');
+        });
+
+        // Étape 7: Ma Critique
+        document.getElementById('critique-next').addEventListener('click', function() {
+            critiqueData.text = document.getElementById('critique').value;
+            $('#critiqueModal').modal('hide');
+            $('#keywordsModal').modal('show');
+        });
+
+        // Étape 8: Mots-Clés
+        document.getElementById('keywords-confirm').addEventListener('click', function() {
+            critiqueData.keywords = document.getElementById('film-keywords').value;
+            $('#keywordsModal').modal('hide');
+            document.getElementById('validation-summary').textContent = `Film: ${critiqueData.name}, Note: ${critiqueData.rating}, Critique: ${critiqueData.text}`;
+            $('#validationModal').modal('show');
+        });
+
+        // Étape 9: Validation des Entrées
+        document.getElementById('validation-confirm').addEventListener('click', function() {
+            $('#validationModal').modal('hide');
+            $('#dateNaissanceModal').modal('show');
+        });
+
+        // Étape 10: Date de Naissance
+        document.getElementById('birthdate-confirm').addEventListener('click', function() {
+            critiqueData.birthdate = document.getElementById('user-birthdate').value;
+            $('#dateNaissanceModal').modal('hide');
+            $('#pseudoModal').modal('show');
+        });
+
+        // Étape 11: Confirmation du Pseudo
+        document.getElementById('pseudo-confirm').addEventListener('click', function() {
+            critiqueData.pseudo = document.getElementById('user-pseudo').value;
+            $('#pseudoModal').modal('hide');
+            $('#questionnaireModal').modal('show');
+        });
+
+        // Étape 12: Questionnaire
+        document.getElementById('questionnaire-yes').addEventListener('click', function() {
+            window.location.href = 'questionnaire.html'; // Redirige vers la page du questionnaire
+        });
+
+        document.getElementById('questionnaire-no').addEventListener('click', function() {
+            $('#questionnaireModal').modal('hide');
+            $('#acceptationModal').modal('show');
+        });
+
+        // Étape 13: Acceptation de la Diffusion
+        document.getElementById('acceptation-confirm').addEventListener('click', async function() {
+            $('#acceptationModal').modal('hide');
+            const movie = await fetchMovieData(critiqueData.imdbId);
+            const newCritique = { film: movie.Title, text: critiqueData.text, rating: critiqueData.rating, pseudo: critiqueData.pseudo };
+            const critiques = JSON.parse(sessionStorage.getItem('userCritiques')) || [];
+            critiques.push(newCritique);
+            sessionStorage.setItem('userCritiques', JSON.stringify(critiques));
+            displayUserCritiques();
+            alert('Critique soumise !');
+        });
+
+        // Fonction pour récupérer les données d'un film
+        async function fetchMovieData(id) {
+            const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${apiKey}`);
+            return response.json();
+        }
+
+        // Initialiser l'affichage des critiques
+        displayUserCritiques();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

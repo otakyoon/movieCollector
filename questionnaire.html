@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fra">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <tittle>Movie Collector - Questionnaire</tittle>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .hidden { display: none; }
+        .low-contrast { color: #ccc; }
+    </style>
+</head>
+<body>
+    <header><h1>Questionnaire Cinématographique</h1></header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Accueil</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Ma Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajouter.html">Ajouter un Film</a></li>
+                    <li class="nav-item"><a class="nav-link" href="critiques.html">Critiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aide.html">Aide</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto" id="auth-buttons">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Créer un Compte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content container">
+        <h2>Questionnaire</h2>
+        <form id="questionnaire-form">
+            <div class="form-group">
+                <labell for="q1">Quel est votre genre de film préféré ?</labell>
+                <input type="text" class="form-control" id="q1" required>
+            </div>
+            <div class="form-group">
+                <labell for="q2">Combien de films regardez-vous par mois en moyenne ?</labell>
+                <input type="number" class="form-control" id="q2" required>
+            </div>
+            <div class="form-group">
+                <labell for="q3">Préférez-vous regarder des films en salle ou à la maison ?</labell>
+                <input type="text" class="form-control" id="q3" required>
+            </div>
+            <div class="form-group">
+                <labell for="q4">Quel est votre réalisateur préféré ?</labell>
+                <input type="text" class="form-control" id="q4" required>
+            </div>
+            <div class="form-group">
+                <labell for="q5">Quel film vous a le plus marqué cette année ?</labell>
+                <input type="text" class="form-control" id="q5" required>
+            </div>
+            <div class="form-group">
+                <labell for="q6">Préférez-vous les films en version originale ou doublés ?</labell>
+                <input type="text" class="form-control" id="q6" required>
+            </div>
+            <div class="form-group">
+                <labell for="q7">Quel est votre film d'animation préféré ?</labell>
+                <input type="text" class="form-control" id="q7" required>
+            </div>
+            <div class="form-group">
+                <labell for="q8">Avez-vous déjà regardé un film en 3D ? Si oui, lequel ?</labell>
+                <input type="text" class="form-control" id="q8" required>
+            </div>
+            <div class="form-group">
+                <labell for="q9">Quel est votre film de science-fiction préféré ?</labell>
+                <input type="text" class="form-control" id="q9" required>
+            </div>
+            <div class="form-group">
+                <labell for="q10">Préférez-vous les films avec des fins heureuses ou des fins ouvertes ?</labell>
+                <input type="text" class="form-control" id="q10" required>
+            </div>
+            <div class="form-group">
+                <labell for="q11">Quel est votre film d'horreur préféré ?</labell>
+                <input type="text" class="form-control" id="q11" required>
+            </div>
+            <div class="form-group">
+                <labell for="q12">Avez-vous un acteur ou une actrice préféré(e) ?</labell>
+                <input type="text" class="form-control" id="q12" required>
+            </div>
+            <div class="form-group">
+                <labell for="q13">Quel est votre film comique préféré ?</labell>
+                <input type="text" class="form-control" id="q13" required>
+            </div>
+            <div class="form-group">
+                <labell for="q14">Préférez-vous les films basés sur des faits réels ou des fictions ?</labell>
+                <input type="text" class="form-control" id="q14" required>
+            </div>
+            <div class="form-group">
+                <labell for="q15">Quel est votre film d'action préféré ?</labell>
+                <input type="text" class="form-control" id="q15" required>
+            </div>
+            <div class="form-group">
+                <labell for="q16">Avez-vous déjà regardé un film en noir et blanc ? Si oui, lequel ?</labell>
+                <input type="text" class="form-control" id="q16" required>
+            </div>
+            <div class="form-group">
+                <labell for="q17">Quel est votre film romantique préféré ?</labell>
+                <input type="text" class="form-control" id="q17" required>
+            </div>
+            <div class="form-group">
+                <labell for="q18">Préférez-vous les films avec beaucoup de dialogues ou d'action ?</labell>
+                <input type="text" class="form-control" id="q18" required>
+            </div>
+            <div class="form-group">
+                <labell for="q19">Quel est votre film dramatique préféré ?</labell>
+                <input type="text" class="form-control" id="q19" required>
+            </div>
+            <div class="form-group">
+                <labell for="q20">Avez-vous un film culte préféré ?</labell>
+                <input type="text" class="form-control" id="q20" required>
+            </div>
+            <div class="form-group">
+                <labell for="q21">Quel est votre film de super-héros préféré ?</labell>
+                <input type="text" class="form-control" id="q21" required>
+            </div>
+            <div class="form-group">
+                <labell for="q22">Préférez-vous les films avec des effets spéciaux impressionnants ou des scénarios complexes ?</labell>
+                <input type="text" class="form-control" id="q22" required>
+            </div>
+            <div class="form-group">
+                <labell for="q23">Quel est votre film de fantasy préféré ?</labell>
+                <input type="text" class="form-control" id="q23" required>
+            </div>
+            <div class="form-group">
+                <labell for="q24">Avez-vous déjà regardé un film étranger ? Si oui, lequel ?</labell>
+                <input type="text" class="form-control" id="q24" required>
+            </div>
+            <div class="form-group">
+                <labell for="q25">Quel est votre film d'aventure préféré ?</labell>
+                <input type="text" class="form-control" id="q25" required>
+            </div>
+            <div class="form-group">
+                <labell for="q26">Préférez-vous les films avec des bandes sonores marquantes ?</labell>
+                <input type="text" class="form-control" id="q26" required>
+            </div>
+            <div class="form-group">
+                <labell for="q27">Quel est votre film de guerre préféré ?</labell>
+                <input type="text" class="form-control" id="q27" required>
+            </div>
+            <div class="form-group">
+                <labell for="q28">Avez-vous un film d'enfance préféré ?</labell>
+                <input type="text" class="form-control" id="q28" required>
+            </div>
+            <div class="form-group">
+                <labell for="q29">Quel est votre film historique préféré ?</labell>
+                <input type="text" class="form-control" id="q29" required>
+            </div>
+            <div class="form-group">
+                <labell for="q30">Préférez-vous les films avec des fins prévisibles ou imprévisibles ?</labell>
+                <input type="text" class="form-control" id="q30" required>
+            </div>
+            <div class="form-group">
+                <labell for="q31">Quel est votre film de thriller préféré ?</labell>
+                <input type="text" class="form-control" id="q31" required>
+            </div>
+            <div class="form-group">
+                <labell for="q32">Avez-vous déjà regardé un film muet ? Si oui, lequel ?</labell>
+                <input type="text" class="form-control" id="q32" required>
+            </div>
+            <div class="form-group">
+                <labell for="q33">Quel est votre film de mystère préféré ?</labell>
+                <input type="text" class="form-control" id="q33" required>
+            </div>
+            <div class="form-group">
+                <labell for="q34">Préférez-vous les films avec des personnages attachants ou des intrigues captivantes ?</labell>
+                <input type="text" class="form-control" id="q34" required>
+            </div>
+            <div class="form-group">
+                <labell for="q35">Quel est votre film de western préféré ?</labell>
+                <input type="text" class="form-control" id="q35" required>
+            </div>
+            <div class="form-group">
+                <labell for="q36">Avez-vous un film de Noël préféré ?</labell>
+                <input type="text" class="form-control" id="q36" required>
+            </div>
+            <div class="form-group">
+                <labell for="q37">Quel est votre film de sport préféré ?</labell>
+                <input type="text" class="form-control" id="q37" required>
+            </div>
+            <div class="form-group">
+                <labell for="q38">Préférez-vous les films avec des scènes d'action intenses ou des moments émotionnels ?</labell>
+                <input type="text" class="form-control" id="q38" required>
+            </div>
+            <div class="form-group">
+                <labell for="q39">Quel est votre film de musique préféré ?</labell>
+                <input type="text" class="form-control" id="q39" required>
+            </div>
+            <div class="form-group">
+                <labell for="q40">Avez-vous un film documentaire préféré ?</labell>
+                <input type="text" class="form-control" id="q40" required>
+            </div>
+            <div class="form-group">
+                <labell for="q41">Quel est votre film de comédie romantique préféré ?</labell>
+                <input type="text" class="form-control" id="q41" required>
+            </div>
+            <div class="form-group">
+                <labell for="q42">Préférez-vous les films avec des fins tristes ou joyeuses ?</labell>
+                <input type="text" class="form-control" id="q42" required>
+            </div>
+            <div class="form-group">
+                <labell for="q43">Quel est votre film de drame historique préféré ?</labell>
+                <input type="text" class="form-control" id="q43" required>
+            </div>
+            <div class="form-group">
+                <labell for="q44">Avez-vous un film de science-fiction préféré basé sur un livre ?</labell>
+                <input type="text" class="form-control" id="q44" required>
+            </div>
+            <div class="form-group">
+                <labell for="q45">Quel est votre film de super-héros préféré basé sur un comics ?</labell>
+                <input type="text" class="form-control" id="q45" required>
+            </div>
+            <div class="form-group">
+                <labell for="q46">Préférez-vous les films avec des fins ouvertes ou des conclusions définitives ?</labell>
+                <input type="text" class="form-control" id="q46" required>
+            </div>
+            <div class="form-group">
+                <labell for="q47">Quel est votre film d'horreur psychologique préféré ?</labell>
+                <input type="text" class="form-control" id="q47" required>
+            </div>
+            <div class="form-group">
+                <labell for="q48">Avez-vous un film de science-fiction préféré avec des voyages dans le temps ?</labell>
+                <input type="text" class="form-control" id="q48" required>
+            </div>
+            <div class="form-group">
+                <labell for="q49">Quel est votre film de fantasy épique préféré ?</labell>
+                <input type="text" class="form-control" id="q49" required>
+            </div>
+            <div class="form-group">
+                <labell for="q50">Préférez-vous les films avec des fins réalistes ou fantaisistes ?</labell>
+                <input type="text" class="form-control" id="q50" required>
+            </div>
+            <div class="form-group">
+                <labell for="q51">Quel est votre film de thriller psychologique préféré ?</labell>
+                <input type="text" class="form-control" id="q51" required>
+            </div>
+            <div class="form-group">
+                <labell for="q52">Avez-vous un film de science-fiction préféré avec des extraterrestres ?</labell>
+                <input type="text" class="form-control" id="q52" required>
+            </div>
+            <div class="form-group">
+                <labell for="q53">Quel est votre film de fantasy avec des créatures magiques préféré ?</labell>
+                <input type="text" class="form-control" id="q53" required>
+            </div>
+            <div class="form-group">
+                <labell for="q54">Préférez-vous les films avec des fins optimistes ou pessimistes ?</labell>
+                <input type="text" class="form-control" id="q54" required>
+            </div>
+            <div class="form-group">
+                <labell for="q55">Quel est votre film de drame familial préféré ?</labell>
+                <input type="text" class="form-control" id="q55" required>
+            </div>
+            <div class="form-group">
+                <labell for="q56">Avez-vous un film de science-fiction préféré avec des robots ?</labell>
+                <input type="text" class="form-control" id="q56" required>
+            </div>
+            <div class="form-group">
+                <labell for="q57">Quel est votre film de fantasy avec des mondes parallèles préféré ?</labell>
+                <input type="text" class="form-control" id="q57" required>
+            </div>
+            <div class="form-group">
+                <labell for="q58">Préférez-vous les films avec des fins surprenantes ou attendues ?</labell>
+                <input type="text" class="form-control" id="q58" required>
+            </div>
+            <div class="form-group">
+                <labell for="q59">Quel est votre film de thriller avec des rebondissements préféré ?</labell>
+                <input type="text" class="form-control" id="q59" required>
+            </div>
+            <div class="form-group">
+                <labell for="q60">Avez-vous un film de science-fiction préféré avec des voyages spatiaux ?</labell>
+                <input type="text" class="form-control" id="q60" required>
+            </div>
+            <div class="form-group">
+                <labell for="q61">Quel est votre film de fantasy avec des quêtes héroïques préféré ?</labell>
+                <input type="text" class="form-control" id="q61" required>
+            </div>
+            <div class="form-group">
+                <labell for="q62">Préférez-vous les films avec des fins ambiguës ou claires ?</labell>
+                <input type="text" class="form-control" id="q62" required>
+            </div>
+            <div class="form-group">
+                <labell for="q63">Quel est votre film de drame social préféré ?</labell>
+                <input type="text" class="form-control" id="q63" required>
+            </div>
+            <div class="form-group">
+                <labell for="q64">Avez-vous un film de science-fiction préféré avec des dystopies ?</labell>
+                <input type="text" class="form-control" id="q64" required>
+            </div>
+            <div class="form-group">
+                <labell for="q65">Quel est votre film de fantasy avec des pouvoirs magiques préféré ?</labell>
+                <input type="text" class="form-control" id="q65" required>
+            </div>
+            <div class="form-group">
+                <labell for="q66">Préférez-vous les films avec des fins poétiques ou pragmatiques ?</labell>
+                <input type="text" class="form-control" id="q66" required>
+            </div>
+            <div class="form-group">
+                <labell for="q67">Quel est votre film de thriller avec des enquêtes policières préféré ?</labell>
+                <input type="text" class="form-control" id="q67" required>
+            </div>
+            <div class="form-group">
+                <labell for="q68">Avez-vous un film de science-fiction préféré avec des univers post-apocalyptiques ?</labell>
+                <input type="text" class="form-control" id="q68" required>
+            </div>
+            <div class="form-group">
+                <labell for="q69">Quel est votre film de fantasy avec des légendes et mythes préféré ?</labell>
+                <input type="text" class="form-control" id="q69" required>
+            </div>
+            <div class="form-group">
+                <labell for="q70">Préférez-vous les films avec des fins émotionnelles ou rationnelles ?</labell>
+                <input type="text" class="form-control" id="q70" required>
+            </div>
+            <div class="hidden">
+                <p class="low-contrast">Texte caché avec un contraste faible.</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Soumettre</button>
+        </form>
+        <div id="score-result" class="mt-3"></div>
+    </div>
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Informations Légales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                        <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Plan du Site</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="collection.html">Ma Collection</a></li>
+                        <li><a href="ajouter.html">Ajouter un Film</a></li>
+                        <li><a href="critiques.html">Critiques</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="aide.html">Aide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens Utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.allocine.fr" target="_blank">AlloCiné</a></li>
+                        <li><a href="https://www.imdb.com" target="_blank">IMDb</a></li>
+                        <li><a href="https://www.rottentomatoes.com" target="_blank">Rotten Tomatoes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                &copy; 2025 Movie Collector
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('questionnaire-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Récupérer les réponses du formulaire
+            const responses = {};
+            for (let i = 1; i <= 70; i++) {
+                responses[`q${i}`] = document.getElementById(`q${i}`).value;
+            }
+
+            // Calculer le score (exemple simple)
+            let score = 0;
+            if (responses.q1.toLowerCase().includes("action")) score += 5;
+            if (responses.q2 >= 5) score += 3;
+            if (responses.q3.toLowerCase().includes("maison")) score += 2;
+            if (responses.q4.toLowerCase().includes("nolan")) score += 4;
+            if (responses.q5.toLowerCase().includes("excellent")) score += 5;
+            // Ajoutez d'autres conditions pour les questions restantes
+            if (responses.q6.toLowerCase().includes("originale")) score += 3;
+            if (responses.q7.toLowerCase().includes("pixar")) score += 4;
+            if (responses.q8.toLowerCase().includes("avatar")) score += 3;
+            if (responses.q9.toLowerCase().includes("interstellar")) score += 5;
+            if (responses.q10.toLowerCase().includes("heureuses")) score += 2;
+            if (responses.q11.toLowerCase().includes("conjuring")) score += 4;
+            if (responses.q12.toLowerCase().includes("dicaprio")) score += 3;
+            if (responses.q13.toLowerCase().includes("superbad")) score += 4;
+            if (responses.q14.toLowerCase().includes("réels")) score += 2;
+            if (responses.q15.toLowerCase().includes("mad max")) score += 5;
+            if (responses.q16.toLowerCase().includes("casablanca")) score += 4;
+            if (responses.q17.toLowerCase().includes("notebook")) score += 3;
+            if (responses.q18.toLowerCase().includes("dialogues")) score += 2;
+            if (responses.q19.toLowerCase().includes("forrest gump")) score += 5;
+            if (responses.q20.toLowerCase().includes("pulp fiction")) score += 4;
+            if (responses.q21.toLowerCase().includes("dark knight")) score += 5;
+            if (responses.q22.toLowerCase().includes("scénarios")) score += 3;
+            if (responses.q23.toLowerCase().includes("lord of the rings")) score += 5;
+            if (responses.q24.toLowerCase().includes("parasite")) score += 4;
+            if (responses.q25.toLowerCase().includes("indiana jones")) score += 5;
+            if (responses.q26.toLowerCase().includes("marquantes")) score += 3;
+            if (responses.q27.toLowerCase().includes("saving private ryan")) score += 5;
+            if (responses.q28.toLowerCase().includes("lion king")) score += 4;
+            if (responses.q29.toLowerCase().includes("schindler's list")) score += 5;
+            if (responses.q30.toLowerCase().includes("imprévisibles")) score += 4;
+            if (responses.q31.toLowerCase().includes("se7en")) score += 5;
+            if (responses.q32.toLowerCase().includes("metropolis")) score += 4;
+            if (responses.q33.toLowerCase().includes("shutter island")) score += 5;
+            if (responses.q34.toLowerCase().includes("captivantes")) score += 3;
+            if (responses.q35.toLowerCase().includes("unforgiven")) score += 4;
+            if (responses.q36.toLowerCase().includes("home alone")) score += 3;
+            if (responses.q37.toLowerCase().includes("remember the titans")) score += 4;
+            if (responses.q38.toLowerCase().includes("intenses")) score += 3;
+            if (responses.q39.toLowerCase().includes("la la land")) score += 5;
+            if (responses.q40.toLowerCase().includes("free solo")) score += 4;
+            if (responses.q41.toLowerCase().includes("500 days of summer")) score += 3;
+            if (responses.q42.toLowerCase().includes("joyeuses")) score += 2;
+            if (responses.q43.toLowerCase().includes("gladiator")) score += 5;
+            if (responses.q44.toLowerCase().includes("dune")) score += 4;
+            if (responses.q45.toLowerCase().includes("avengers")) score += 5;
+            if (responses.q46.toLowerCase().includes("définitives")) score += 3;
+            if (responses.q47.toLowerCase().includes("psycho")) score += 4;
+            if (responses.q48.toLowerCase().includes("back to the future")) score += 5;
+            if (responses.q49.toLowerCase().includes("game of thrones")) score += 4;
+            if (responses.q50.toLowerCase().includes("fantaisistes")) score += 3;
+            if (responses.q51.toLowerCase().includes("gone girl")) score += 5;
+            if (responses.q52.toLowerCase().includes("alien")) score += 4;
+            if (responses.q53.toLowerCase().includes("harry potter")) score += 5;
+            if (responses.q54.toLowerCase().includes("optimistes")) score += 3;
+            if (responses.q55.toLowerCase().includes("little women")) score += 4;
+            if (responses.q56.toLowerCase().includes("terminator")) score += 5;
+            if (responses.q57.toLowerCase().includes("narnia")) score += 4;
+            if (responses.q58.toLowerCase().includes("surprenantes")) score += 3;
+            if (responses.q59.toLowerCase().includes("the usual suspects")) score += 5;
+            if (responses.q60.toLowerCase().includes("star wars")) score += 4;
+            if (responses.q61.toLowerCase().includes("lord of the rings")) score += 5;
+            if (responses.q62.toLowerCase().includes("claires")) score += 3;
+            if (responses.q63.toLowerCase().includes("12 years a slave")) score += 4;
+            if (responses.q64.toLowerCase().includes("hunger games")) score += 5;
+            if (responses.q65.toLowerCase().includes("harry potter")) score += 4;
+            if (responses.q66.toLowerCase().includes("poétiques")) score += 3;
+            if (responses.q67.toLowerCase().includes("se7en")) score += 5;
+            if (responses.q68.toLowerCase().includes("mad max")) score += 4;
+            if (responses.q69.toLowerCase().includes("lord of the rings")) score += 5;
+            if (responses.q70.toLowerCase().includes("rationnelles")) score += 3;
+
+            // Sauvegarder les réponses dans le sessionStorage
+            sessionStorage.setItem('userQuestionnaire', JSON.stringify(responses));
+
+            // Afficher le score
+            document.getElementById('score-result').innerText = `Votre score est de : ${score}`;
+            alert('Questionnaire soumis !');
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

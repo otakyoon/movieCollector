@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Collector - Profil</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .hidden { display: none; }
+        .low-contrast { color: #ccc; }
+    </style>
+</head>
+<body>
+    <header><h1>Mon Profil</h1></header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Accueil</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Ma Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajouter.html">Ajouter un Film</a></li>
+                    <li class="nav-item"><a class="nav-link" href="critiques.html">Critiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aide.html">Aide</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto" id="auth-buttons">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Créer un Compte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content container">
+        <h2>Informations du Profil</h2>
+        <p>Nom : Utilisateur</p>
+        <p>Email : utilisateur@example.com</p>
+        <h3>Changer de Mot de Passe</h3>
+        <form id="change-password-form">
+            <div class="form-group">
+                <label for="ancienMotDePasse">Ancien Mot de Passe</label>
+                <input type="password" class="form-control" id="ancienMotDePasse">
+            </div>
+            <div class="form-group">
+                <label for="nouveauMotDePasse">Nouveau Mot de Passe</label>
+                <input type="password" class="form-control" id="nouveauMotDePasse">
+            </div>
+            <button type="submit" class="btn btn-primary">Changer</button>
+        </form>
+        <div class="hidden">
+            <p class="low-contrast">Texte caché avec un contraste faible.</p>
+        </div>
+    </div>
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Informations Légales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mentions-legales.html">Mentions Légales</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                        <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Plan du Site</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="collection.html">Ma Collection</a></li>
+                        <li><a href="ajouter.html">Ajouter un Film</a></li>
+                        <li><a href="critiques.html">Critiques</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="aide.html">Aide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens Utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.allocine.fr" target="_blank">AlloCiné</a></li>
+                        <li><a href="https://www.imdb.com" target="_blank">IMDb</a></li>
+                        <li><a href="https://www.rottentomatoes.com" target="_blank">Rotten Tomatoes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                &copy; 2025 Movie Collector
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer les informations du sessionStorage
+            const userName = sessionStorage.getItem('userName');
+            const userEmail = sessionStorage.getItem('userEmail');
+
+            // Afficher les informations dans la page
+            if (userName) {
+                document.querySelector('.content p:nth-child(2)').textContent = 'Nom : ' + userName;
+            }
+            if (userEmail) {
+                document.querySelector('.content p:nth-child(3)').textContent = 'Email : ' + userEmail;
+            }
+        });
+
+        document.getElementById('change-password-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Mot de passe changé avec succès !');
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

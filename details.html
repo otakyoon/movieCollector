@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Détails du Film</h1>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Accueil</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="catalogue.html">Cliquez ici</a></li>
+                    <li class="nav-item"><a class="nav-link" href="collection.html">Ma Collection</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajouter.html">Ajouter un Film</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profil.html">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="critiques.html">Critiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aide.html">Aide</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto" id="auth-buttons">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Connexion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Créer un Compte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content container">
+        <div id="movie-details">
+            <!-- Les détails du film seront ajoutés ici par JavaScript -->
+        </div>
+        <div id="movie-trailers" class="mt-4">
+            <h3>Bandes-annonces</h3>
+            <!-- Les bandes-annonces seront ajoutées ici par JavaScript -->
+        </div>
+    </div>
+
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Informations Légales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mentions-legales.html">Cliquez ici</a></li>
+                        <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+                        <li><a href="conditions-utilisation.html">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Plan du Site</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue.html">Catalogue</a></li>
+                        <li><a href="collection.html">Ma Collection</a></li>
+                        <li><a href="ajouter.html">Ajouter un Film</a></li>
+                        <li><a href="critiques.html">Critiques</a></li>
+                        <li><a href="profil.html">Profil</a></li>
+                        <li><a href="aide.html">Aide</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liens Utiles</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.allocine.fr" target="_blank">AlloCiné</a></li>
+                        <li><a href="https://www.imdb.com" target="_blank">IMDb</a></li>
+                        <li><a href="https://www.rottentomatoes.com" target="_blank">Rotten Tomatoes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                &copy; 2025 Movie Collector
+            </div>
+        </div>
+    </footer>
+    <script>
+        const apiKey = 'b545d6b8';
+
+        // Fonction pour récupérer les détails d'un film par ID
+        async function fetchMovieDetails(movieId) {
+            const response = await fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`);
+            const data = await response.json();
+            return data;
+        }
+
+        // Afficher les détails du film
+        async function displayMovieDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieId = urlParams.get('id');
+
+            if (movieId) {
+                const movieDetails = await fetchMovieDetails(movieId);
+                const movieDetailsDiv = document.getElementById('movie-details');
+
+                // Afficher les informations du film
+                movieDetailsDiv.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="${movieDetails.Poster}" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h2>${movieDetails.Title} (${movieDetails.Year})</h2>
+                            <p><strong>Réalisateur:</strong> ${movieDetails.Director}</p>
+                            <p><strong>Scénaristes:</strong> ${movieDetails.Writer}</p>
+                            <p><strong>Acteurs:</strong> ${movieDetails.Actors}</p>
+                            <p><strong>Genre:</strong> ${movieDetails.Genre}</p>
+                            <p><strong>Pays:</strong> ${movieDetails.Country}</p>
+                            <p><strong>Langue:</strong> ${movieDetails.Language}</p>
+                            <p><strong>Durée:</strong> ${movieDetails.Runtime}</p>
+                            <p><strong>Date de sortie:</strong> ${movieDetails.Released}</p>
+                            <p><strong>Résumé:</strong> ${movieDetails.Plot}</p>
+                            <p><strong>Récompenses:</strong> ${movieDetails.Awards}</p>
+                            <p><strong>Notes:</strong> ${movieDetails.Ratings.map(rating => `${rating.Source}: ${rating.Value}`).join(', ')}</p>
+                            <p><strong>Box Office:</strong> ${movieDetails.BoxOffice}</p>
+                            <p><strong>Production:</strong> ${movieDetails.Production}</p>
+                            <p><strong>Site Web:</strong> <a href="${movieDetails.Website}" target="_blank">${movieDetails.Website}</a></p>
+                        </div>
+                    </div>
+                `;
+
+                // Afficher les bandes-annonces
+                const movieTrailersDiv = document.getElementById('movie-trailers');
+                const trailers = [
+                    'https://www.youtube.com/embed/TRAILER_ID_1',
+                    'https://www.youtube.com/embed/TRAILER_ID_2'
+                ];
+                trailers.forEach(trailerUrl => {
+                    const iframe = document.createElement('iframe');
+                    iframe.width = '560';
+                    iframe.height = '315';
+                    iframe.src = trailerUrl;
+                    iframe.frameBorder = '0';
+                    iframe.allowFullscreen = true;
+                    iframe.allow = 'autoplay';
+                    movieTrailersDiv.appendChild(iframe);
+                });
+            }
+        }
+
+        displayMovieDetails();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

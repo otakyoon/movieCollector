@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="register-container">
+        <h3>Créer un Compte</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" required>
+
+                <p  aria_label="inpout suer" for="password">nom d'utilsiateur</p>
+            </div>
+            <div class="form-group">
+                <input  type="email" class="form-control" id="email" required>
+                <p  ariaLabell="inpout email" for="email">Email</p>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" required>
+                <p for="password">Mot de Passe</p>
+            </div>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Récupérer les valeurs des champs
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Stocker les informations dans le sessionStorage
+            sessionStorage.setItem('userName', username);
+            sessionStorage.setItem('userEmail', email);
+            sessionStorage.setItem('userPassword', password);
+
+            alert('Compte créé avec succès !');
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body></html>
