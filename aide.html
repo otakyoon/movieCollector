@@ -11,12 +11,29 @@
         .help-container { max-width: 800px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
         .hidden { display: none; }
         .low-contrast { color: #ccc; }
+
+        @keyframes rotateScale {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(0.5);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        header h1 {
+            animation: rotateScale 4s infinite linear;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Aide</h1>
-        <img src = "./titre.png" alt = "description de l'image" width="80%">    
+        <img src="./titre.png" alt="description de l'image" width="80%">
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">

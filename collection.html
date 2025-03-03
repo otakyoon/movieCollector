@@ -26,12 +26,15 @@
         footer {
             text-align: right; /* Aligner le texte à droite dans le pied de page */
         }
+        #banner {
+            transition: background-color 0.1s; /* Transition rapide pour un effet stroboscopique */
+        }
     </style>
 </head>
 <body>
-    <header>
+    <header id="banner">
         <h1>Ma Collection de Films</h1>
-        <img src = "./titre.png" alt = "description de l'image" width="80%">    
+        <img src="./titre.png" alt="description de l'image" width="80%">
     </header>
     <div class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -133,6 +136,15 @@
                 authButtons.style.display = 'none';
                 displayUserCollection();
             }
+
+            // Changer les couleurs de la bannière de façon stroboscopique
+            const banner = document.getElementById('banner');
+            const colors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F6'];
+            let index = 0;
+            setInterval(() => {
+                banner.style.backgroundColor = colors[index];
+                index = (index + 1) % colors.length;
+            }, 100); // Change la couleur toutes les 100 millisecondes
         });
 
         // Fonction pour récupérer les données d'un film
