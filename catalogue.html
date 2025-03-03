@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr-">
 <head>
+    <script src="data.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <style>
@@ -47,6 +48,7 @@
 <body>
     <header>
         <h1>Catalogue de Films</h1>
+        <img src = "./titre.png" alt = "description de l'image" width="80%">    
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -172,13 +174,14 @@
         // Afficher tous les films avec images
         async function displayAllMovies() {
             const movieList = document.getElementById('movie-list');
-            let allMovies = [];
+            //let allMovies = [];
+            let allMovies = JSON.parse(data) ;
             const totalPages = 20; // Nombre de pages à récupérer pour obtenir environ 50 films
 
-            for (let page = 1; page <= totalPages; page++) {
+           /* for (let page = 1; page <= totalPages; page++) {
                 const movies = await fetchMoviesBySearch('movie', page);
                 allMovies = allMovies.concat(movies);
-            }
+            }*/
 
             allMovies.forEach(movie => {
                 const movieItem = document.createElement('div');
